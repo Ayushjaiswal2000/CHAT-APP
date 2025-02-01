@@ -4,10 +4,11 @@ const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    fullname: { type: String, required: true, minimumLength: 6 },
-    profilePic: { type: String, defaultValue: "" },
+    fullName: { type: String, required: true, minimumLength: 6 },
+    profilePic: { type: String, default: "" },
   },
   { timestamps: true }
 );
 
-export default User = new mongoose.model("users", userSchema);
+export const User = mongoose.model("User", userSchema);
+export default User;
