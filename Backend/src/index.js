@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser";
 import messageRoutes from "./Routes/message.route.js";
+import bodyParser from "body-parser";
 import cors from "cors";
 
 const app = express();
@@ -16,6 +17,10 @@ app.use(
     credentials: true,
   })
 );
+// Increase the limit for JSON bodies
+app.use(bodyParser.json({ limit: "50mb" })); // Set the limit as required
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
 dotenv.config();
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
