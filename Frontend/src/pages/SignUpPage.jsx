@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useAuthStore } from "../store/useAuthStore.js";
+import { useState } from "react";
+import { useAuthStore } from "../store/useAuthStore";
 import {
   Eye,
   EyeOff,
@@ -10,17 +10,19 @@ import {
   User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import AuthImagePattern from "../components/AuthImagePattern.jsx";
+
+import AuthImagePattern from "../components/AuthImagePattern";
 import toast from "react-hot-toast";
 
-export const SignUpPage = () => {
-  const [showPassword, setShowPassword] = useState();
-  const { isSigningUp, signup } = useAuthStore();
+const SignUpPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     password: "",
   });
+
+  const { signup, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
     if (!formData.fullName.trim()) return toast.error("Full name is required");
@@ -52,7 +54,7 @@ export const SignUpPage = () => {
             <div className="flex flex-col items-center gap-2 group">
               <div
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
-            group-hover:bg-primary/20 transition-colors"
+              group-hover:bg-primary/20 transition-colors"
               >
                 <MessageSquare className="size-6 text-primary" />
               </div>
@@ -62,7 +64,7 @@ export const SignUpPage = () => {
               </p>
             </div>
           </div>
-          {/* FORM */}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
               <label className="label">
@@ -83,6 +85,7 @@ export const SignUpPage = () => {
                 />
               </div>
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
@@ -102,6 +105,7 @@ export const SignUpPage = () => {
                 />
               </div>
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
@@ -159,6 +163,7 @@ export const SignUpPage = () => {
           </div>
         </div>
       </div>
+
       {/* right side */}
 
       <AuthImagePattern
@@ -168,5 +173,4 @@ export const SignUpPage = () => {
     </div>
   );
 };
-
 export default SignUpPage;
