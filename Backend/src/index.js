@@ -16,7 +16,9 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
-
+// Increase the limit for JSON bodies
+app.use(bodyParser.json({ limit: "500mb" })); // Set the limit as required
+app.use(bodyParser.urlencoded({ limit: "500mb", extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -25,10 +27,6 @@ app.use(
     credentials: true,
   })
 );
-
-// Increase the limit for JSON bodies
-app.use(bodyParser.json({ limit: "50mb" })); // Set the limit as required
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
